@@ -20,9 +20,7 @@ class IncidenceMatrix:
     def build_matrix(self):
         for term in self.vocabulary:
             for doc_id, tokens in self.documents.items():
-                tokens_set = set(tokens)
-
-                if term in tokens_set:
+                if term in tokens:
                     self.matrix[term][doc_id] = 1
                 else:
                     self.matrix[term][doc_id] = 0

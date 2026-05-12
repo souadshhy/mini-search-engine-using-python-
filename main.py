@@ -154,6 +154,7 @@ menu = st.sidebar.radio(
         "Inverted Index",
         "Wildcard Query",
         "Boolean Retrieval",
+        "Positional Index",
         "Phrase Query",
         "Ranked Retrieval"
     ]
@@ -581,6 +582,64 @@ elif menu == "Boolean Retrieval":
 
                 st.info("No documents matched this Boolean query.")
 
+elif menu == "Positional Index":
+
+    st.title("Positional Index")
+
+    term = st.text_input(
+        "Enter one term",
+        placeholder="example: machine"
+    )
+
+    if st.button("Show Positions"):
+
+        processed = preprocessor.preprocess(term)
+
+        if not processed:
+
+            st.warning("Please enter a valid term.")
+
+        elif len(processed) > 1:
+
+            st.warning("Please enter only one term.")
+
+        else:
+
+            searched_term = processed[0]
+
+            st.subheader("Processed Term")
+            st.code(searched_term)
+
+            posting = positional.get_posting_list(
+                searched_term
+            )
+
+            rows = []
+
+            for doc_id, positions in posting["documents"].items():
+
+                rows.append({
+                    "Document ID": f"Document {doc_id}",
+                    "Positions": positions
+                })
+
+            st.subheader("Positional Posting List")
+
+            if rows:
+
+                df = pd.DataFrame(rows)
+
+                st.dataframe(
+                    df,
+                    use_container_width=True,
+                    hide_index=True
+                )
+
+            else:
+
+                st.info(
+                    "No positional data found for this term."
+                )
 
 # PHRASE QUERY
 
