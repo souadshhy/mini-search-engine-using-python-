@@ -27,7 +27,7 @@ class IncidenceMatrix:
 
     def get_docs_for_term(self, term):
         """
-        Returns all documents where term exists according to incidence matrix.
+        Returns all documents where term exists
         """
         matching_docs = set()
 

@@ -37,7 +37,7 @@ class PositionalIndex:
 
         results = []
 
-        # !! Step 2: check positions
+        #  Step 2: check positions
         for doc_id in candidate_docs:
             positions_lists = [
                 self.index[term][doc_id]

@@ -51,8 +51,9 @@ class RankedRetrieval:
         for term, df_value in self.df.items():
             self.idf[term] = math.log10(N / df_value)
 
-    # Document vector style from image:
+    # Document vector     
     # document weight = document TF only
+
     def compute_document_weights(self):
         for doc_id, terms in self.tf.items():
 
@@ -67,7 +68,7 @@ class RankedRetrieval:
         self.compute_idf()
         self.compute_document_weights()
 
-    # Query vector style from image:
+    # Query vector style
     # query weight = query TF * IDF
     def query_vector(self, query_tokens):
         query_tf = {}
